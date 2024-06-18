@@ -11,15 +11,22 @@ func main() {
 
 	addPeople(people)
 
-	suspects := []string{"Tony Stark", "John Doe", "Eren Yeager"}
+	suspects := []string{"Tony Stark", "John Doe", "Eren Yeager", "Jane Doe"}
+
+	var suspectWithMaxCrimes man.Man
 
 	for _, suspect := range suspects {
 		if _, ok := people[suspect]; ok {
 			fmt.Println(people[suspect].Name, people[suspect].LastName, people[suspect].Age, people[suspect].Gender, people[suspect].Crimes)
+			if suspectWithMaxCrimes == (man.Man{}) || people[suspect].Crimes > suspectWithMaxCrimes.Crimes {
+				suspectWithMaxCrimes = people[suspect]
+			}
 		} else {
 			fmt.Println("Not found")
 		}
 	}
+
+	fmt.Println(suspectWithMaxCrimes)
 
 }
 
@@ -30,7 +37,7 @@ func addPeople(people map[string]man.Man) {
 		LastName: "Doe",
 		Age:      25,
 		Gender:   "male",
-		Crimes:   0,
+		Crimes:   1,
 	}
 
 	people["Jane Doe"] = man.Man{
@@ -38,7 +45,7 @@ func addPeople(people map[string]man.Man) {
 		LastName: "Doe",
 		Age:      25,
 		Gender:   "female",
-		Crimes:   0,
+		Crimes:   12,
 	}
 
 	people["John Smith"] = man.Man{
@@ -54,7 +61,7 @@ func addPeople(people map[string]man.Man) {
 		LastName: "Smith",
 		Age:      25,
 		Gender:   "female",
-		Crimes:   0,
+		Crimes:   2,
 	}
 
 	people["Alice Smith"] = man.Man{
@@ -62,7 +69,7 @@ func addPeople(people map[string]man.Man) {
 		LastName: "Smith",
 		Age:      25,
 		Gender:   "female",
-		Crimes:   0,
+		Crimes:   2,
 	}
 
 	people["Bob Smith"] = man.Man{
